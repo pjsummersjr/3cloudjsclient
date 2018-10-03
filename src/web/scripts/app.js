@@ -4,7 +4,7 @@ var apiConfig = require('./apiConfig');
 
 document.getElementById('login').addEventListener("click", login);
 document.getElementById('logout').addEventListener("click", logout);
-document.getElementById('getstuff').addEventListener("click", loadContent);
+//document.getElementById('').addEventListener("click", loadContent);
 
 var authContext = new AuthenticationContext(config);
 
@@ -21,7 +21,15 @@ var user = authContext.getCachedUser();
 
 if(user){
     console.log(user);
-    document.getElementById('status').innerHTML = `<span>Logged in: ${user.profile.name}</span>`;
+    document.getElementById('login').hidden = true;
+    document.getElementById('logout').hidden = false;
+    document.getElementById('status').innerHTML = `<span>Welcome, ${user.profile.name}</span>`;
+    document.getElementById('status-row').hidden = false;
+    loadContent();
+}
+else {
+    document.getElementById('login').hidden = false;
+    document.getElementById('logout').hidden = true;
 }
 
 function login() {
@@ -52,11 +60,22 @@ function loadContent() {
         }   
         var bearerToken = token;
         req.addEventListener('load', function() {
-            document.getElementById('app').innerHTML = this.responseText;
+            //document.getElementById('content').innerHTML = this.responseText;
+            var docsAsJson = JSON.parse(this.responseText);
+            console.log(docsAsJson);
+            var responseStr = `<div class="container">`;
+            docsAsJson.value.map((item, index) => {
+                responseStr += `<div class"row"><div class="col-sm col-12">`;
+                responseStr += `${item.name}`;
+                responseStr += `</div></div>`;
+            })
+            responseStr += `</div>`;
+            document.getElementById('content').innerHTML = responseStr;
         });
         req.open("GET", resourceEndpoint);
         req.setRequestHeader("Authorization", "Bearer " + bearerToken);
         req.setRequestHeader("Content-Type", "application/json");
+        req.setRequestHeader("Accept", "application/json");
         req.setRequestHeader("Cache-Control", "no-cache");
         
         req.send();
