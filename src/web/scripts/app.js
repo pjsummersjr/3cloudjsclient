@@ -110,13 +110,17 @@ function renderDocuments() {
 function renderEngagements() {
     var docsAsJson = JSON.parse(this.responseText);
     console.log(docsAsJson);
-    var responseStr = `<div class="container">`;
+    var responseStr = "";
     docsAsJson.value.map((item, index) => {
-        responseStr += `<div class"row"><div class="col-sm col-12">`;
-        responseStr += `${item.mtc_title}`;
+        responseStr += `<div class="card"><div class="card-body">`;
+        responseStr += `<h5 class"card-title">${item.mtc_title}</h5>`;
+        responseStr += `<h6 class="card-subtitle mb-2 text-muted">${item.mtc_siebelaccountname}</h6>`
+        responseStr += `<p class="card-text">${item.mtc_goal}</p>`
+        responseStr += `<a href="#" class="card-link">Related Documents</a>`
+        responseStr += `<a href="#" class="card-link">Related Engagements</a>`
         responseStr += `</div></div>`;
     })
-    responseStr += `</div>`;
+    
     document.getElementById('content').innerHTML = responseStr;
 }
 
