@@ -32,7 +32,7 @@ gulp.task("server", function () {
  * Copies html files from source to destination folder
  */
 gulp.task("copy-html", function() {
-    return gulp.src("src/web/*.html")
+    return watch("src/web/*.html")
         .pipe(gulp.dest("dist/web"));
 });
 /**
