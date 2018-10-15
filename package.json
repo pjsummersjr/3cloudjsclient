@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/pjsummersjr/simple-express-app#readme",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "msal": "^0.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",

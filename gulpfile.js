@@ -39,7 +39,7 @@ gulp.task("copy-html", function() {
  * Copies the adal.js file from src to the destination folder
  */
 gulp.task("copy-js", function() {
-    return gulp.src("src/web/scripts/adal.js")
+    return gulp.src("src/web/scripts/msal.js")
         .pipe(gulp.dest("dist/web/scripts"));
 });
 /**
@@ -64,7 +64,7 @@ gulp.task("build-js", function(){
         .pipe(gulpWebpack({
             mode:modeVal,
             output: {
-                path: path.join(__dirname, 'dest', 'web', 'scripts'),
+                path: path.join(__dirname, 'dist', 'web', 'scripts'),
                 filename: 'app.js'
             },
             devtool:'source-map',
